@@ -17,13 +17,8 @@ public class HelperClass {
 	
 	int width;
 	int height;
-	
-
-	
-	
 
 	public static String setImBin(String fName){
-		
 		FileInputStream fileInputStream=null;
 
 		File file = new File(Environment
@@ -43,24 +38,16 @@ public class HelperClass {
 		}
 
 		return Base64.encodeToString(bFile, Base64.DEFAULT);
-
 	}
-	
-	
 	
 	public static String encodeTobase64(Bitmap image)
 	{
-		//Bitmap immagex=image;
-		
 		Bitmap immagex = image;
-		
 		//Bitmap immagex = Bitmap.createScaledBitmap(image,480,640, false);
-		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();  
 		immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 		byte[] b = baos.toByteArray();
 		String imageEncoded = Base64.encodeToString(b,Base64.DEFAULT);
-
 		Log.e("LOOK", imageEncoded);
 		return imageEncoded;
 	}
@@ -70,7 +57,6 @@ public class HelperClass {
 		byte[] decodedByte = Base64.decode(input, 0);
 		return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length); 
 	}
-	
 	
 	public static String getWithinTags(String matchString,String tag){
 
@@ -83,9 +69,6 @@ public class HelperClass {
 		catch(Exception e){
 			System.out.println("An exception has occured within tags: "+e.toString());
 			return "";
-			
 		}
 	}
-	
-	
 }

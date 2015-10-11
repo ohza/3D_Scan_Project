@@ -17,36 +17,24 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 
-
-
 public class MainActivity extends Activity {
 	
 	private Button startButton;
 	public static OutputStream outS;
 	
-	
 	@Override
 	protected void onResume(){
 		super.onResume();
 		 startService(new Intent(MainActivity.this,ClientThreadService.class));
-		
-		
-		
 	}
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        
         startService(new Intent(MainActivity.this,ClientThreadService.class));
         
-        
-        
         startButton = (Button) findViewById(R.id.startButton);
-        
         
         startButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -55,20 +43,9 @@ public class MainActivity extends Activity {
 				
 				Intent intent = new Intent(MainActivity.this,FotoList.class);
 				startActivity(intent);
-				
-			
 			}
-			
 		});
-        
-        
     }
-    
-    
-  
-
-	
-    
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,20 +63,11 @@ public class MainActivity extends Activity {
 		
 		:{
 			showDialog(DIALOG_ALERT);
-
 			return true;
-
 		}
-
-
-
 		default: return false;
 		}
-
 	}
-    
-    
-    
     
     @Override
 	protected Dialog onCreateDialog(int id) {
@@ -117,14 +85,11 @@ public class MainActivity extends Activity {
 		return super.onCreateDialog(id);
 	}
 
-
 	private static final int DIALOG_ALERT = 10;
-
 	private final class CancelOnClickListener implements
 	DialogInterface.OnClickListener {
 		@Override
 		public void onClick(DialogInterface dialog, int which) {
-
 		}
 	}
 
@@ -136,8 +101,4 @@ public class MainActivity extends Activity {
 			onDestroy();
 		}
 	}
-	
-    
-    
-    
 }

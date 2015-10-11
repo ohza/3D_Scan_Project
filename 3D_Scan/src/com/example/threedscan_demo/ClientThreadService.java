@@ -27,31 +27,24 @@ public class ClientThreadService extends Service{
 	public static boolean timeoutflag;
 	public static boolean connectionEstablishedFlag = false;
 	
-	private static final int SERVERPORT = 4444;
-	//private static String SERVER_IP = "104.40.135.218";
-	private static String SERVER_IP = "192.168.178.27";
+	private static final int SERVERPORT = 4444; //To be substituted with desired port
+	private static String SERVER_IP = "192.168.178.27"; // To be substituted with server ip
 	
 	String TAG = "TEST";
 	
 	InputStream in;
 	ByteArrayOutputStream out;
 	
-
 	public static Socket socket;
 	BufferedReader br;
 	TextView tf;
 	Context context;
 	public static Thread connT;
 
-
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
 		context = getBaseContext();
-		Log.d(TAG, "SERVICE ON CREATE HAS BEEN CALLED");
-		Log.d(TAG, "The connectionEstablishedFlag is: "+connectionEstablishedFlag);
 
 		connT = new Thread(new Runnable() {
 			@Override
@@ -59,60 +52,44 @@ public class ClientThreadService extends Service{
 				connectToPythonServer();
 			}
 		});
-
 		connT.start();
-
-
 	}
 
-	
 	public void connectToPythonServer() {
-
-
 
 		try {
 			
-			Log.d(TAG,"Connect to PythonServer has been called");
-
-
 			socket = new Socket();
 			socket.connect(new InetSocketAddress(SERVER_IP, SERVERPORT),2000);
 			timeoutflag = false;
 			
-			
-			if(socket.isConnected()){
-
+			if(socket.isConnected()) {
 				Log.d(TAG,"The socket is connected");
-
 			}
 
-			if(socket.isBound()){
-
+			if(socket.isBound()) {
 				Log.d(TAG,"The socket is bound");
-
 			}
 
-			if(!socket.isBound()){
+			if(!socket.isBound()) {
 				Log.d(TAG,"The socket is not bound");
 				timeoutflag = true;
 			}
 
-			if(!socket.isConnected()){
+			if(!socket.isConnected()) {
 				Log.d(TAG,"The socket is not connected");
 				timeoutflag = true;
 			}
 
-			if(socket.isInputShutdown()){
+			if(socket.isInputShutdown()) {
 				Log.d(TAG,"The socket input is shutdown");
 				timeoutflag = true;
 			}
 
-			if(socket.isOutputShutdown()){
+			if(socket.isOutputShutdown()) {
 				Log.d(TAG,"The socket output is shutdown");
 				timeoutflag = true;
 			}
-
-
 		}
 
 		catch (Exception e) {
@@ -127,20 +104,14 @@ public class ClientThreadService extends Service{
 			Log.d(TAG,"I have an IO exection 2..."+e.toString());
 		}
 
-
-
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		byte[] buf = new byte[1];
 		int n = 0;
 		int k = 0;
 		int available = 0;
 
-
-
-
 		try {
 			while (-1 != (n = in.read(buf))) {
-
 				if (k == 0) {
 					available = in.available();
 				}
@@ -155,7 +126,6 @@ public class ClientThreadService extends Service{
 						connectionEstablishedFlag = true;
 						out.close();
 						out.reset();
-						
 					}
 					Log.d(TAG, "The connectionEstablishedFlag is: "+connectionEstablishedFlag);
 					
@@ -167,11 +137,8 @@ public class ClientThreadService extends Service{
 						
 					    out.close();
 						out.reset();
-						
 					}
-
 				}
-
 			}
 		} catch (IOException e) {
 			Log.d(TAG,"I have an IO exection..."+e.toString());
@@ -188,26 +155,14 @@ public class ClientThreadService extends Service{
 
 	public void serverMessageReceived(String responseString){
 		
-		
 		String PLYStatus = HelperClass.getWithinTags(responseString, "PLY_Status");
 		
-		if(PLYStatus.equals("OK")){
-			
+		if(PLYStatus.equals("OK")) {
 			Log.d(TAG,"Ply status is ok");
-			
 			String PlyString = responseString.substring(45, responseString.length()-20);
-			
 			byte[] decodedString = Base64.decode(PlyString, Base64.DEFAULT );
-			
 			Log.d(TAG,PlyString);
 			
-			
-			
-			
-			
-			
-			
-			/////////////////////////////////////
 			FileOutputStream imageOutFile=null;
 			  try {
 					imageOutFile = new FileOutputStream("/sdcard/Pictures/myply.ply");
@@ -222,15 +177,12 @@ public class ClientThreadService extends Service{
 					e1.printStackTrace();
 				}
 
-		   
 		        try {
 					imageOutFile.close();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			
-	
 			
 			Intent plyView = new Intent(Intent.ACTION_VIEW);
 			plyView.setData(Uri.fromFile(new File("/sdcard/Pictures/myply.ply")));
@@ -243,18 +195,10 @@ public class ClientThreadService extends Service{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
-			
-			
 		}
-		else{
-			
+		else {
 			Log.d(TAG,"Ply status is not ok");
-			
 		}
-		
-		
 	}
 
 	@Override
@@ -265,19 +209,13 @@ public class ClientThreadService extends Service{
 
 	@Override
 	public void onStart(Intent intent,int startId){
-
 		Log.d(TAG, "SERVICE ON START HAS BEEN CALLED");
-
-
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-
 	}
-
-
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -285,10 +223,7 @@ public class ClientThreadService extends Service{
 		if(!connT.isAlive()){
 			Log.d(TAG, "CONNT HAS BEEN RESTARTED");
 			onCreate();
-
 		}
 		return 0;
 	}
-	
 }
-
