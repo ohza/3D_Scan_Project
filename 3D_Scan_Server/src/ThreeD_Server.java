@@ -13,33 +13,21 @@ import  org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
  * Discards any incoming data.
  */
 public class ThreeD_Server {
-
     public static void main(String[] args) throws Exception {
-       
     	System.out.println("Server started...");
-    	
-    
     	
         ServerBootstrap bootstrap = new ServerBootstrap(
                 new NioServerSocketChannelFactory(
                         Executors.newCachedThreadPool(),
                         Executors.newCachedThreadPool()));
         
-      
-        // Set up the pipeline factory.
         bootstrap.setPipelineFactory(new ChannelPipelineFactory() {
             @Override
 			public ChannelPipeline getPipeline() throws Exception {
                 return Channels.pipeline(new ThreeD_ServerHandler());
            }
         });
-
-        // Bind and start to accept incoming connections.
-     
         bootstrap.bind(new InetSocketAddress(4444));
         System.out.println("Server binded...");
-        
-    }
-       
-       	
+    }   	
 }

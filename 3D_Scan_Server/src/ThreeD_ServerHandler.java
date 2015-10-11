@@ -28,7 +28,6 @@ import org.apache.commons.io.FileUtils;
 
 public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	
-	
 	StringBuilder sbu;
 	StringBuilder SBU = new StringBuilder();
 	Thread PythonStuff_1;
@@ -122,8 +121,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    	        	
 	    	        	String command = "cmd.exe /c cd c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64 && c:\\Python27\\python.exe RunBundler.py --photos=\"./examples/BilderVonClient\" 2>&1";
 	    		    	Process p=null;
-	    		    
-	    		    	
 	    				try {
 	    					p = Runtime.getRuntime().exec(command);
 	    					OutputStream out1 = p.getOutputStream();
@@ -149,7 +146,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    					e1.printStackTrace();
 	    				}
 	    		    	System.out.println("Wait for: "+i);
-	    		    	
 	    	        }
 	    	        
 	    	        catch(Exception v) {
@@ -168,22 +164,17 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 				e2.printStackTrace();
 			}
 	    	
-	    	
 	    	PythonStuff_2 = new Thread() {
 	    	    public void run() {
 	    	        try {
 
-	    	
-	    		    	
 	    		    	String command2 = "cmd.exe /c cd c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64 && c:\\Python27\\python.exe RunPMVS.py --bundlerOutputPath=\"c:/Users/o-a_000/osm-bundler/osm-bundlerWin64/osm-bundler-myoutput\" 2>&1";
 	    		    	Process p2=null;
-	    		    
 	    		    	
 	    				try {
 	    					p2 = Runtime.getRuntime().exec(command2);
 	    					OutputStream out2 = p2.getOutputStream();
 	    					InputStream err2 = p2.getErrorStream();
-	    					
 	    					BufferedReader in = new BufferedReader(new 
 
 	    							InputStreamReader(p2.getInputStream()));
@@ -191,9 +182,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    							while ((line = in.readLine()) != null) {
 	    							    System.out.println(line);
 	    							}
-
-	    					
-	    					
 	    				} catch (IOException e1) {
 	    					e1.printStackTrace();
 	    				
@@ -207,8 +195,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    				}
 	    		    	System.out.println("Wait for: "+i2);
 
-	    	            
-	    	        	
 	    	        } catch(Exception v) {
 	    	            System.out.println("Exception in thread: "+v.toString());
 	    	        }
@@ -225,10 +211,7 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 				e2.printStackTrace();
 			}
 	    	
-	    	
-	    	//////////////////////////////////////
 	    	Thread PythonStuff_3;
-			
 			
 			PythonStuff_3 = new Thread() {
 	    	    public void run() {
@@ -262,7 +245,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    					e1.printStackTrace();
 	    				}
 	    		    	System.out.println("Wait for: "+i3);
-	    		    	
 	    	        }
 	    	        
 	    	        catch(Exception v) {
@@ -281,7 +263,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 				e2.printStackTrace();
 			}
 	    	
-
             String retString = null;
                         
             if((i==0 && i2==0) && i3==0){
@@ -292,7 +273,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 				//fileString = fileString.replace("\n", "").replace("\r", "");
 				retString = "<3DDemo><PLY_Status>OK</PLY_Status><PLY_File>"+fileString+"</PLY_File></3DDemo>";
 				System.out.println("This bid is OK");
-				
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -310,14 +290,10 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    	
 	    	//System.out.println(retString);
 	    	byte[] retbytes = retString.getBytes();
-	    	
 	    	e.getChannel().write(ChannelBuffers.wrappedBuffer(retbytes));
-	    	
 	    	System.out.println("I am at the very end");
-	    	
 	    }
 	}
-	
 	
 	String readFile(String fileName) throws IOException {
 	    BufferedReader br = new BufferedReader(new FileReader(fileName));
@@ -390,11 +366,8 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 			e1.printStackTrace();
 		}
     	}
-        
-        //////////////////////////////////////
     }
-    
-    
+
     private String encodeFileToBase64Binary(String fileName)
 			throws IOException {
     	
@@ -431,6 +404,4 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    is.close();
 	    return bytes;
 	}
-    
- 	
 }
