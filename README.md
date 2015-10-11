@@ -12,3 +12,5 @@ http://meshlab.sourceforge.net/
 and sent back to the mobile device where it can be displayd with KiwiViewer
 http://www.kiwiviewer.org/
 
+The path to bundler, meshlab have to be adjusted and the ip / port modifed.
+(I will try to make this more automated in the future)
