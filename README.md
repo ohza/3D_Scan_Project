@@ -16,6 +16,6 @@ The path to bundler, meshlab have to be adjusted and the ip / port modifed.
 (I will try to make this more automated in the future)
 
 The 3D_Scan_Server has dependencies on the following jar files:
-*commons-codec-1.9.jar
-*commons-io-2.4.jar
-*netty-3.9.0.Final.jar
+* commons-codec-1.9.jar
+* commons-io-2.4.jar
+* netty-3.9.0.Final.jar
