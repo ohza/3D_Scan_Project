@@ -30,12 +30,17 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	
 	StringBuilder sbu;
 	StringBuilder SBU = new StringBuilder();
-	Thread PythonStuff_1;
-	Thread PythonStuff_2;
-	Thread PythonStuff_3;
+	Thread PythonCode_1;
+	Thread PythonCode_2;
+	Thread PythonCode_3;
 	int i = 10;
 	int i2 = 10;
 	int i3 = 10;
+	
+	String bundler_path = "c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64";
+	String output_dir = "\\osm-bundler-myoutput";
+	String bundler_ex = "\\examples\\BilderVonClient";
+	String python_pth = "c:\\Python27\\python.exe";
 	
 	public static byte[] decodeImage(String imageDataString) {
         return Base64.decodeBase64(imageDataString);
@@ -52,10 +57,8 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 		catch(Exception e){
 			System.out.println("An exception has occured within tags: "+e.toString());
 			return "";
-			
 		}
 	}
-	
 	
 	static void removeBlankSpace(StringBuilder sb) {
 		
@@ -68,10 +71,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 		  sb.delete(j, sb.length());
 		}
 	
-	
-	
-	
-
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
 		sbu = new StringBuilder();
@@ -85,40 +84,26 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    
 	    if(SBU.toString().startsWith("<3DDemo>") &&  sbu.toString().endsWith("</3DDemo>")){
 	    	
-	    	
-	    	
 	    	 try {
-					FileUtils.cleanDirectory(new File("c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64\\osm-bundler-myoutput"));
+					FileUtils.cleanDirectory(new File(bundler_path+output_dir));
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 	    	 
-	    	
-	            
 	            try {
-					FileUtils.cleanDirectory(new File("c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64\\examples\\BilderVonClient"));
+					FileUtils.cleanDirectory(new File(bundler_path+bundler_ex));
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 	    	
 	    	System.out.println("A 3DDemo has been received");
-	    	
-	    	
 	    	ThreeD_ServerHandler.removeBlankSpace(SBU);
-	    	
 	    	Integer.parseInt(getWithinTags(SBU.toString(),"ImAnzahl"));
-	    	
 	    	this.extractImage(Integer.parseInt(getWithinTags(SBU.toString(),"ImAnzahl")));
 	        
-	        /////////////////////////////
-	    	
-	    	
-	    	PythonStuff_1 = new Thread() {
+	    	PythonCode_1 = new Thread() {
 	    	    public void run() {
 	    	        try {
-	    	        	
 	    	        	String command = "cmd.exe /c cd c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64 && c:\\Python27\\python.exe RunBundler.py --photos=\"./examples/BilderVonClient\" 2>&1";
 	    		    	Process p=null;
 	    				try {
@@ -154,20 +139,19 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    	    }  
 	    	};
 
-	    	PythonStuff_1.start();
+	    	PythonCode_1.start();
 	    	
 	    	try {
-				PythonStuff_1.join();
+	    		PythonCode_1.join();
 			} catch (InterruptedException e2) {
 				// TODO Auto-generated catch block
 				System.out.println("Thread interrupt exection: "+e2.toString());
 				e2.printStackTrace();
 			}
 	    	
-	    	PythonStuff_2 = new Thread() {
+	    	PythonCode_2 = new Thread() {
 	    	    public void run() {
 	    	        try {
-
 	    		    	String command2 = "cmd.exe /c cd c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64 && c:\\Python27\\python.exe RunPMVS.py --bundlerOutputPath=\"c:/Users/o-a_000/osm-bundler/osm-bundlerWin64/osm-bundler-myoutput\" 2>&1";
 	    		    	Process p2=null;
 	    		    	
@@ -184,7 +168,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    							}
 	    				} catch (IOException e1) {
 	    					e1.printStackTrace();
-	    				
 	    				}
 	    		    	
 	    				try {
@@ -201,19 +184,19 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    	    }  
 	    	};
 
-	    	PythonStuff_2.start();
+	    	PythonCode_2.start();
 	    	
 	    	try {
-				PythonStuff_2.join();
+	    		PythonCode_2.join();
 			} catch (InterruptedException e2) {
 				// TODO Auto-generated catch block
 				System.out.println("Thread interrupt exection: "+e2.toString());
 				e2.printStackTrace();
 			}
 	    	
-	    	Thread PythonStuff_3;
+	    	Thread PythonCode_3;
 			
-			PythonStuff_3 = new Thread() {
+	    	PythonCode_3 = new Thread() {
 	    	    public void run() {
 	    	        try {
 	    	        	String command3 = "cmd.exe /c cd c:\\Program Files\\VCG\\MeshLab && meshlabserver.exe -i c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64\\osm-bundler-myoutput\\pmvs\\models\\pmvs_options.txt.ply -o c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64\\osm-bundler-myoutput\\pmvs\\models\\pmvs_options_bin.ply -om vc, vn 2>&1" ;
@@ -234,16 +217,16 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    				    } catch (IOException e1) {
 	    					e1.printStackTrace();
 	    					System.out.println("Errer with python 1");
-	    				}
+	    				    }
 	    		    	
-	    				try {
-	    				
-	    					i3 = p3.waitFor();
-	    				} catch (InterruptedException e1) {
-	    					// TODO Auto-generated catch block
-	    					System.out.println("Errer with python 2:" +e1.toString());
-	    					e1.printStackTrace();
-	    				}
+		    				try {
+		    					i3 = p3.waitFor();
+		    				} catch (InterruptedException e1) {
+		    					// TODO Auto-generated catch block
+		    					System.out.println("Errer with python 2:" +e1.toString());
+		    					e1.printStackTrace();
+		    				}
+		    				
 	    		    	System.out.println("Wait for: "+i3);
 	    	        }
 	    	        
@@ -253,10 +236,10 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    	    }  
 	    	};
 
-	    	PythonStuff_3.start();
+	    	PythonCode_3.start();
 	    	
 	    	try {
-				PythonStuff_3.join();
+	    		PythonCode_3.join();
 			} catch (InterruptedException e2) {
 				// TODO Auto-generated catch block
 				System.out.println("Thread interrupt exection: "+e2.toString());
@@ -266,32 +249,23 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
             String retString = null;
                         
             if((i==0 && i2==0) && i3==0){
-	    	
-	    	try {
-	    		String fileString = this.encodeFileToBase64Binary("c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64\\osm-bundler-myoutput\\pmvs\\models\\pmvs_options_bin.ply");
-	    	
-				//fileString = fileString.replace("\n", "").replace("\r", "");
-				retString = "<3DDemo><PLY_Status>OK</PLY_Status><PLY_File>"+fileString+"</PLY_File></3DDemo>";
-				System.out.println("This bid is OK");
-				
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				retString = "<3DDemo><PLY_Status>FAILED</PLY_Status><PLY_File></PLY_File></3DDemo>";
-				System.out.println(e1.toString());
-			}
-	    	
+		    	try {
+		    		String fileString = this.encodeFileToBase64Binary(bundler_path+output_dir+"\\pmvs\\models\\pmvs_options_bin.ply");
+					//fileString = fileString.replace("\n", "").replace("\r", "");
+					retString = "<3DDemo><PLY_Status>OK</PLY_Status><PLY_File>"+fileString+"</PLY_File></3DDemo>";
+					System.out.println("This bid is OK");
+					
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					retString = "<3DDemo><PLY_Status>FAILED</PLY_Status><PLY_File></PLY_File></3DDemo>";
+					System.out.println(e1.toString());
+				}
             }
-            
-            else{
-            	
+            else {
             	retString = "<3DDemo><PLY_Status>FAILED</PLY_Status><PLY_File></PLY_File></3DDemo>";
-            	
             }
-	    	
-	    	//System.out.println(retString);
 	    	byte[] retbytes = retString.getBytes();
 	    	e.getChannel().write(ChannelBuffers.wrappedBuffer(retbytes));
-	    	System.out.println("I am at the very end");
 	    }
 	}
 	
@@ -315,6 +289,7 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
+    	
     	System.out.println("Exception...");
         e.getCause().printStackTrace();
         Channel ch = e.getChannel();
@@ -323,20 +298,16 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
     }
     
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
-    	
-    	
+
     	byte[] bytes = "<3DDemoSendOK/>".getBytes();
-    	
     	e.getChannel().write(ChannelBuffers.wrappedBuffer(bytes));
     	System.out.println("Client Connected :"+ctx.getChannel().getRemoteAddress().toString());
-    	
     }
     
     public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e){
-    	System.out.println("Client Disconnected :"+ctx.getChannel().getRemoteAddress().toString());
     	
+    	System.out.println("Client Disconnected :"+ctx.getChannel().getRemoteAddress().toString());
     }
-    
     
     public void extractImage(int Anzahl){
     	
@@ -346,7 +317,7 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
         
         // Write a image byte array into file system
         try {
-			imageOutFile = new FileOutputStream("/Users/o-a_000/osm-bundler/osm-bundlerWin64/examples/BilderVonClient/Bild_"+a+".jpg");
+			imageOutFile = new FileOutputStream(bundler_path+"/examples/BilderVonClient/Bild_"+a+".jpg");
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -357,7 +328,6 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
    
         try {
 			imageOutFile.close();
@@ -398,6 +368,7 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	    }
  
 	    if (offset < bytes.length) {
+	    	is.close();
 	        throw new IOException("Could not completely read file "+file.getName());
 	    }
  
