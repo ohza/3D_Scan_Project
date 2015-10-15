@@ -1,5 +1,5 @@
 # 3D_Scan_Project
-Android client-server App for 3D reconstruction.
+Android client-server application for 3D reconstruction.
 
 The app allows to create a 3D model from 2D images taken with the mobile device.
 It sends the image via an xml container to a server (which is included in the project).
