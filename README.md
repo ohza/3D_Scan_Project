@@ -12,10 +12,12 @@ http://meshlab.sourceforge.net/
 and sent back to the mobile device where it can be displayd with KiwiViewer
 http://www.kiwiviewer.org/
 
-The path to bundler, meshlab have to be adjusted and the ip / port modifed.
+The path to bundler, meshlab have to be adjusted and the ip / port of the server modifed.
 (I will try to make this more automated in the future)
 
 The 3D_Scan_Server has dependencies on the following jar files:
 * commons-codec-1.9.jar
 * commons-io-2.4.jar
 * netty-3.9.0.Final.jar
+
+(Which are now included in the project as Referenced libraries)
