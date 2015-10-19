@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">3DScan</string>
-    <string name="action_settings">Beenden</string>
+    <string name="action_settings">Quit Application</string>
     
     <string name="app_title">Multi-View Stereo Demo</string>
     <string name="app_autor">by Oswald Aldrian</string>
@@ -11,5 +11,9 @@
     
     <string name="new_photo">New Photo</string>
     <string name="scene_reconst">3D Reconst.</string>
-   
+    
+    <string name="quit_ask">Are you sure you want to quit 3D Demo?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    
 </resources>
