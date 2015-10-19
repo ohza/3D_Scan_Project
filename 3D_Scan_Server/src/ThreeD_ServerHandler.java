@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +23,17 @@ import org.jboss.netty.channel.SimpleChannelHandler;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 
+/** 
+ * Class ThreeD_serverHandler
+ * This file handles all incoming requests and calls internal Python routines,
+ * that will do feature extraction and matching.
+ * A call to Meshlab is also made for postprocessing the resulting .ply file
+ *
+ * All still in prototypical state, with hard coded strings etc.
+ * Needs to be improved in future version
+ * @author oa
+ *
+ */
 
 public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	
@@ -37,6 +46,7 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 	int i2 = 10;
 	int i3 = 10;
 	
+	// These string path files need to be modified for machine
 	String bundler_path = "c:\\Users\\o-a_000\\osm-bundler\\osm-bundlerWin64";
 	String output_dir = "\\osm-bundler-myoutput";
 	String bundler_ex = "\\examples\\BilderVonClient";
@@ -46,8 +56,13 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
         return Base64.decodeBase64(imageDataString);
     }
 	
-	public String getWithinTags(String matchString,String tag){
-
+	/**
+	 * Function that extracts all content with a tag
+	 * @param matchString A string in which the tag has to be present
+	 * @param tag The tag which is matched against
+	 * @return
+	 */
+	public String getWithinTags(String matchString, String tag) {
 		final Pattern pattern = Pattern.compile("<"+tag+">(.+?)</"+tag+">");
 		final Matcher matcher = pattern.matcher(matchString);
 		try{
@@ -60,16 +75,19 @@ public class ThreeD_ServerHandler extends SimpleChannelHandler {
 		}
 	}
 	
+	/**
+	 * Helper Function thats strips off any white space
+	 * @param sb
+	 */
 	static void removeBlankSpace(StringBuilder sb) {
-		
-		  int j = 0;
-		  for(int i = 0; i < sb.length(); i++) {
-		    if (!Character.isWhitespace(sb.charAt(i))) {
-		       sb.setCharAt(j++, sb.charAt(i));
-		    }
-		  }
-		  sb.delete(j, sb.length());
+		int j = 0;
+		for(int i = 0; i < sb.length(); i++) {
+			if (!Character.isWhitespace(sb.charAt(i))) {
+				sb.setCharAt(j++, sb.charAt(i));
+			}
 		}
+		sb.delete(j, sb.length());
+	}
 	
 	@Override
 	public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {

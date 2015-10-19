@@ -2,7 +2,14 @@
 <resources>
 
     <string name="app_name">3DScan</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Beenden</string>
-
+    
+    <string name="app_title">Multi-View Stereo Demo</string>
+    <string name="app_autor">by Oswald Aldrian</string>
+    <string name="app_start_demo">Start Demo</string>
+    <string name="app_logo_desc">The logo of the app</string>
+    
+    <string name="new_photo">New Photo</string>
+    <string name="scene_reconst">3D Reconst.</string>
+   
 </resources>
