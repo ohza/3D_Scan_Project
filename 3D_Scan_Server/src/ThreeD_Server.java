@@ -1,5 +1,3 @@
-
-
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 
@@ -9,8 +7,12 @@ import  org.jboss.netty.channel.ChannelPipeline;
 import  org.jboss.netty.channel.ChannelPipelineFactory;
 import  org.jboss.netty.channel.Channels;
 import  org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+
 /**
- * Discards any incoming data.
+ * class ThreeD_Server
+ * The entry point that starts the server
+ * @author oa
+ *
  */
 public class ThreeD_Server {
     public static void main(String[] args) throws Exception {

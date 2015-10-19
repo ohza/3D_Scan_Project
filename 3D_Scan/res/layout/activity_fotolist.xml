@@ -10,13 +10,9 @@
    
         <ListView
             android:id="@+id/fotolist"
-            android:layout_width="match_parent" 
-            android:layout_height="0dip" 
-            android:layout_weight="1"/>
-       
-        
-        
-        
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.80" />
         
          <LinearLayout
          android:id="@+id/LinearLayout01"
@@ -29,32 +25,19 @@
              android:id="@+id/neuesfoto"
              android:background="#0F000000"
              android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_height="30sp"
              android:layout_weight="1"
              android:width="0dp" 
-             android:text="Neues Foto"
-              />
+             android:text="@string/new_photo"/>
 
          <Button
              android:id="@+id/threedrec"
              android:background="#0F000000"
              android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
+             android:layout_height="30sp"
              android:layout_weight="1"
              android:width="0dp" 
-             android:text="3D Reconst."
-             
-              />
+             android:text="@string/scene_reconst"/>
          
-         
-         
-         
-
-        
      </LinearLayout>
-        
-       
-        
-        
-        
     </LinearLayout>

@@ -37,17 +37,17 @@ public class FotoList extends Activity{
 	private static long imageTime;
 	private ArrayList<String> imList_names;
 	private Context context;
+	
 	@Override
 	protected void onResume(){
 		super.onResume();
-		
-		if(imList == null){
-		imList = new ArrayList_Images();
+		if(imList == null) {
+			imList = new ArrayList_Images();
 		}
 		
-		if(imList_names == null){
+		if(imList_names == null) {
 			imList_names = new ArrayList_Images();
-			}
+		}
 	}
 	
 	@Override
@@ -97,7 +97,7 @@ public class FotoList extends Activity{
 					for (int si = 0;si<imList_names.size();si++){
 						
 					Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getPath()+"/Pictures/" + imList_names.get(si));
-					bitmap = Bitmap.createScaledBitmap (bitmap, 300,400, true);	
+					bitmap = Bitmap.createScaledBitmap (bitmap, 480,640, true);	
 						
 					printwriter.write("<ImBin_"+si+">" +HelperClass.encodeTobase64(bitmap) +"</ImBin_"+si+">");
 					printwriter.flush();
