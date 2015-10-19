@@ -54,7 +54,10 @@ public final class R {
         public static final int app_start_demo=0x7f050004;
         public static final int app_title=0x7f050002;
         public static final int new_photo=0x7f050006;
+        public static final int no=0x7f05000a;
+        public static final int quit_ask=0x7f050008;
         public static final int scene_reconst=0x7f050007;
+        public static final int yes=0x7f050009;
     }
     public static final class style {
         /** 
@@ -62,9 +65,21 @@ public final class R {
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
 
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
+
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
+ API 11 theme customizations can go here. 
+
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    
+ API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 

@@ -31,7 +31,6 @@ public class FotoList extends Activity{
 	private Uri outputFileUri;
 	private static int TAKE_PICTURE = 1;
 	private ArrayList_Images imList;
-	private String TAG = "TEST";
 	private MyArrayAdapter adapter;
 	private ListView  imListView;
 	private static long imageTime;
@@ -89,33 +88,29 @@ public class FotoList extends Activity{
         start3D.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				try{
+				try {
 					PrintWriter printwriter = new PrintWriter(MainActivity.outS);
 					printwriter.write("<3DDemo>");
 					printwriter.write("<ImAnzahl>" +imList_names.size()  +"</ImAnzahl>");
-					
-					for (int si = 0;si<imList_names.size();si++){
-						
+					for (int si = 0;si<imList_names.size();si++){	
 					Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getPath()+"/Pictures/" + imList_names.get(si));
 					bitmap = Bitmap.createScaledBitmap (bitmap, 480,640, true);	
-						
 					printwriter.write("<ImBin_"+si+">" +HelperClass.encodeTobase64(bitmap) +"</ImBin_"+si+">");
 					printwriter.flush();
-					}
+				}
 					
-					printwriter.write("</3DDemo>");
-					printwriter.flush();
+				printwriter.write("</3DDemo>");
+				printwriter.flush();
 					
-					try {
-						MainActivity.outS.flush();
-						
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				try {
+					MainActivity.outS.flush();
 					
-					imList = new ArrayList_Images();
-					imList_names = new ArrayList<String>();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				imList = new ArrayList_Images();
+				imList_names = new ArrayList<String>();
 				}   
 			
 				catch(Exception e){
@@ -129,17 +124,14 @@ public class FotoList extends Activity{
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if (requestCode == TAKE_PICTURE)
-			if(resultCode == RESULT_OK){
-				
+			if(resultCode == RESULT_OK) {
 				imList_names.add(imageTime+".jpg");
-				
 				Bitmap bitmap_scaled = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getPath()+"/Pictures/" + imageTime+".jpg"),80,80,true);
-				imList.add(HelperClass.encodeTobase64(bitmap_scaled));
-						
+				imList.add(HelperClass.encodeTobase64(bitmap_scaled));	
 				adapter = new MyArrayAdapter(listContext, imList);
 				imListView.setAdapter(adapter);
 				adapter.setNotifyOnChange(true);
-		}
+			}
 	}
 	
     @Override
@@ -173,8 +165,7 @@ public class FotoList extends Activity{
 	    }
 	    catch(IOException e)
 	    {
-	         e.printStackTrace();
-	        
+	         e.printStackTrace(); 
 	    }   
     } 
 }

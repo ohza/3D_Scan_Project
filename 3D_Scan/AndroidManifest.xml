@@ -12,19 +12,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/new_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+         >
         <activity
             android:name="com.example.threedscan_demo.MainActivity"
-             android:screenOrientation="portrait"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
              <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-           
         </activity>
         
         
@@ -32,15 +31,12 @@
             android:name="com.example.threedscan_demo.FotoList"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
-           
         </activity>
         
         <service
-        android:name="com.example.threedscan_demo.ClientThreadService"
-        android:label="@string/app_name" >
+	        android:name="com.example.threedscan_demo.ClientThreadService"
+	        android:label="@string/app_name" >
         </service> 
-        
-        
         
     </application>
 

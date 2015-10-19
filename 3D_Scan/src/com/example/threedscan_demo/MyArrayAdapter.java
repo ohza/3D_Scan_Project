@@ -2,7 +2,6 @@ package com.example.threedscan_demo;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ public class MyArrayAdapter extends ArrayAdapter<String> {
 		sampleView = (TextView) rowView.findViewById(R.id.label);
 		imView = (ImageView) rowView.findViewById(R.id.icon);
 		
-		sampleView.setText("Foto Nr.: "+(position+1));
+		sampleView.setText("Foto No..: "+(position+1));
 		//imView.setImageBitmap(Bitmap.createScaledBitmap(HelperClass.decodeBase64(values.get(position)),80, 80, true));
 		imView.setImageBitmap(HelperClass.decodeBase64(values.get(position)));
 		return rowView;
