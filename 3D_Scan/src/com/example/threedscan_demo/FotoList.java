@@ -126,7 +126,7 @@ public class FotoList extends Activity{
 		if (requestCode == TAKE_PICTURE)
 			if(resultCode == RESULT_OK) {
 				imList_names.add(imageTime+".jpg");
-				Bitmap bitmap_scaled = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getPath()+"/Pictures/" + imageTime+".jpg"),80,80,true);
+				Bitmap bitmap_scaled = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getPath()+"/Pictures/" + imageTime+".jpg"),60,80,true);
 				imList.add(HelperClass.encodeTobase64(bitmap_scaled));	
 				adapter = new MyArrayAdapter(listContext, imList);
 				imListView.setAdapter(adapter);

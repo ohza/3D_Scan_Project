@@ -31,7 +31,6 @@ public class MyArrayAdapter extends ArrayAdapter<String> {
 		imView = (ImageView) rowView.findViewById(R.id.icon);
 		
 		sampleView.setText("Foto No..: "+(position+1));
-		//imView.setImageBitmap(Bitmap.createScaledBitmap(HelperClass.decodeBase64(values.get(position)),80, 80, true));
 		imView.setImageBitmap(HelperClass.decodeBase64(values.get(position)));
 		return rowView;
 	}
