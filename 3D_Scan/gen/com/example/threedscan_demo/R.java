@@ -27,8 +27,9 @@ public final class R {
     }
     public static final class id {
         public static final int LinearLayout01=0x7f080001;
-        public static final int action_settings=0x7f08000a;
+        public static final int action_settings=0x7f08000b;
         public static final int appLogo=0x7f080005;
+        public static final int datetime=0x7f08000a;
         public static final int fotolist=0x7f080000;
         public static final int icon=0x7f080008;
         public static final int label=0x7f080009;

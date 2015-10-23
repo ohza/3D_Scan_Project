@@ -25,7 +25,7 @@
              android:id="@+id/neuesfoto"
              android:background="#0F000000"
              android:layout_width="wrap_content"
-             android:layout_height="30sp"
+             android:layout_height="40sp"
              android:layout_weight="1"
              android:width="0dp" 
              android:text="@string/new_photo"/>
@@ -34,7 +34,7 @@
              android:id="@+id/threedrec"
              android:background="#0F000000"
              android:layout_width="wrap_content"
-             android:layout_height="30sp"
+             android:layout_height="40sp"
              android:layout_weight="1"
              android:width="0dp" 
              android:text="@string/scene_reconst"/>
