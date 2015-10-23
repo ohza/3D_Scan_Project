@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,6 +37,7 @@ public class FotoList extends Activity{
 	private static long imageTime;
 	private ArrayList<String> imList_names;
 	private Context context;
+	private ArrayList<String> dateTime;
 	
 	@Override
 	protected void onResume(){
@@ -65,6 +67,7 @@ public class FotoList extends Activity{
         imListView = (ListView) findViewById(R.id.fotolist);
         imList = new ArrayList_Images();
         imList_names = new ArrayList<String>();
+        dateTime = new ArrayList<String>();
         
         listContext = this.getApplicationContext();
         neuesFoto =  (Button) findViewById(R.id.neuesfoto);
@@ -106,11 +109,11 @@ public class FotoList extends Activity{
 					MainActivity.outS.flush();
 					
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				imList = new ArrayList_Images();
 				imList_names = new ArrayList<String>();
+				dateTime = new ArrayList<String>();
 				}   
 			
 				catch(Exception e){
@@ -126,9 +129,10 @@ public class FotoList extends Activity{
 		if (requestCode == TAKE_PICTURE)
 			if(resultCode == RESULT_OK) {
 				imList_names.add(imageTime+".jpg");
+				dateTime.add(java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime()));
 				Bitmap bitmap_scaled = Bitmap.createScaledBitmap(BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getPath()+"/Pictures/" + imageTime+".jpg"),60,80,true);
 				imList.add(HelperClass.encodeTobase64(bitmap_scaled));	
-				adapter = new MyArrayAdapter(listContext, imList);
+				adapter = new MyArrayAdapter(listContext, imList, dateTime);
 				imListView.setAdapter(adapter);
 				adapter.setNotifyOnChange(true);
 			}
