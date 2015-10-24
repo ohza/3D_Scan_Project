@@ -22,4 +22,4 @@ The 3D_Scan_Server has dependencies on the following jar files:
 
 (Which are now included in the project as Referenced libraries)
 
-![alt text](https://github.com/ohza/3D_Scan_Project/blob/master/example.png "Example")
+![alt text](https://github.com/ohza/3D_Scan_Project/blob/master/example.jpg "Example")
