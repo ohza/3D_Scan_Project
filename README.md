@@ -8,9 +8,9 @@ The path to Bundler needs to be adjusted in the local server installation. And t
 
 The 3D_Scan_Server has dependencies on the following jar files:
 
-*commons-codec-1.9.jar
-*commons-io-2.4.jar
-*netty-3.9.0.Final.jar
+* commons-codec-1.9.jar
+* commons-io-2.4.jar
+* netty-3.9.0.Final.jar
 
 (Which are included in the project as Referenced libraries)
 
